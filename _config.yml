@@ -9,7 +9,7 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: Seongho # add your name
 author-img:  # add your photo
-about-author: I am a software developer focusing on web development. Always hungry to keep learning. # add description
+about-author: I am a software developer focusing on web development. # add description
 social-twitter: # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-github: nsho77 # add your Github handle
