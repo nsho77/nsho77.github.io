@@ -1,17 +1,35 @@
 ---
 layout: post
-title: 10 Tips To Improve Your Workflow
-date: 2017-09-12 00:00:00 +0300
-description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
+title: Git 브랜치와 Merge 기초
+date: 2018-04-27 15:45:00 +0900
+description: Git 의 공식 설명서를 읽고 정리해 보았다. # Add post description (optional)
 img: workflow.jpg # Add image post (optional)
-tags: [Productivity, Workflow] # add tag
+tags: [Programming, Git] # add tag
 ---
+깃의 [다음 페이지](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging) 에서 상세한 설명을 볼 수 있습니다.<br />
+velopert 님의 튜토리얼 중 git checkout 하는 부분이 있어서 관련 내용을 찾아보던 중 정리한 내용이다.  
 
-Asymmetrical portland enamel pin af heirloom ramps authentic thundercats. Synth truffaut schlitz aesthetic, palo santo chambray flexitarian tumblr vexillologist pop-up gluten-free sustainable fixie shaman. Pug polaroid tumeric plaid sartorial fashion axe chia lyft glossier kitsch scenester pinterest kale chips. Blog etsy umami fashion axe shoreditch. Prism chambray heirloom, drinking vinegar portland paleo slow-carb. Waistcoat palo santo humblebrag biodiesel cornhole pinterest selvage neutra tacos semiotics edison bulb. Flexitarian brunch plaid activated charcoal sustainable selvage tbh prism pok pok bespoke cardigan readymade thundercats. Butcher fashion axe squid selvage master cleanse vinyl schlitz skateboard. Lomo shaman man bun keffiyeh asymmetrical listicle. Kickstarter trust fund fanny pack post-ironic wayfarers swag kitsch. Shaman pug kale chips meh squid.
+###  브랜치란?
+head가 가리키는 작업영역이다. 기본적으로 master 브랜치에서 작업하고 이 branch 와 다른 작업을 하고 싶을 때 새로운 branch를 생성해 작업 할 수 있다.<br />
+작업하는 branch를 바꾸면 head 가 해당 branch를 가리킨다.<br />
+다음은 branch를 생성하는 명령어이다. branch 명은 iss53으로 하자
+```bash
+$ git branch iss53
+```
+다음은 iss53으로 head 가 가리키는 영역을 바꾸는 명령이다.
+```bash
+$ git checkout iss53
+```
+branch iss53에서 commit을 하면 다음 그림과 같은 상태가 된다.
+<img src="https://git-scm.com/book/en/v2/images/basic-branching-3.png" alt="make branch">
 
-###  Literally pickled twee man braid
-8-bit ugh selfies, literally pickled twee man braid four dollar toast migas. Slow-carb mustache meggings pok pok. Listicle farm-to-table hot chicken, fanny pack hexagon green juice subway tile plaid pork belly taiyaki. Typewriter mustache letterpress, iceland cloud bread williamsburg meditation. Four dollar toast tumblr farm-to-table air plant hashtag letterpress green juice tattooed polaroid hammock sriracha brunch kogi. Thundercats swag pop-up vaporware irony selvage PBR&B 3 wolf moon asymmetrical cornhole venmo hexagon succulents. Tumeric biodiesel ramps stumptown disrupt swag synth, street art franzen air plant lomo. Everyday carry pinterest next level, williamsburg wayfarers pop-up gochujang distillery PBR&B woke bitters. Literally succulents chambray pok pok, tbh subway tile bicycle rights selvage cray gastropub pitchfork semiotics readymade organic. Vape flexitarian tumblr raclette organic direct trade. Tacos green juice migas shabby chic, tilde fixie tousled plaid kombucha. +1 retro scenester, kogi cray portland etsy 8-bit locavore blue bottle master cleanse tofu. PBR&B adaptogen chartreuse knausgaard palo santo intelligentsia.
+그런데 master 브랜치에서 해결해야 할 이슈가 생겼다면 어떻게 해야 할까? 일단 master 브랜치로 checkout 해야 한다.
+이슈를 해결하고 commit 하기 위해서 새로운 브랜치 hotfix를 만들고 commit 한다. 그러면 아래와 같은 상태가 된다. <br />
+<img src="https://git-scm.com/book/en/v2/images/basic-branching-4.png" alt="Hotfix branch based on `master`.">
 
+master 브랜치로 와서 hotfix 브랜치의 내용을 merge 하여 수정 사항을 반영한다. hotfix는 master 브랜치를 base로 하기 때문에
+merge 를 할 경우 단순히 master 가 가리키는 커밋이 hotfix가 가리키는 커밋으로 바뀌게 된다. 이를 master 브랜치가 hotfix로 fastforward 되었다고 한다.<br />
+<img src="https://git-scm.com/book/en/v2/images/basic-branching-5.png" alt="`master` is fast-forwarded to `hotfix`.">
 ![Macbook]({{site.baseurl}}/assets/img/mac.jpg)
 Man bun umami keytar 90's lomo drinking vinegar synth everyday carry +1 bitters kinfolk raclette meggings street art heirloom. Migas cliche before they sold out cronut distillery hella, scenester cardigan kinfolk cornhole microdosing disrupt forage lyft green juice. Tofu deep v food truck live-edge edison bulb vice. Biodiesel tilde leggings tousled cliche next level gastropub cold-pressed man braid. Lyft humblebrag squid viral, vegan chicharrones vice kinfolk. Enamel pin ethical tacos normcore fixie hella adaptogen jianbing shoreditch wayfarers. Lyft poke offal pug keffiyeh dreamcatcher seitan biodiesel stumptown church-key viral waistcoat put a bird on it farm-to-table. Meggings pitchfork master cleanse pickled venmo. Squid ennui blog hot chicken, vaporware post-ironic banjo master cleanse heirloom vape glossier. Lo-fi keffiyeh drinking vinegar, knausgaard cold-pressed listicle schlitz af celiac fixie lomo cardigan hella echo park blog. Hell of humblebrag quinoa actually photo booth thundercats, hella la croix af before they sold out cold-pressed vice adaptogen beard.
 
