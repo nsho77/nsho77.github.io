@@ -1,13 +1,70 @@
 ---
 layout: post
-title: Conference on Javascript
-date: 2017-09-10 00:00:00 +0300
-description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
-img: js-1.png # Add image post (optional)
-tags: [Js, Conference] # add tag
+title: fly me to the alpha... 문제풀이
+date: 2018-04-29 12:00:00 +0900
+description: 백준의 문제를 풀어보았다. # Add post description (optional)
+img:  # Add image post (optional)
+tags: [Algorithm, Code] # add tag
 ---
-Jean shorts organic cornhole, gochujang post-ironic chicharrones authentic flexitarian viral PBR&B forage wolf. Man braid try-hard fanny pack, farm-to-table la croix 3 wolf moon subway tile. Single-origin coffee prism taxidermy fashion axe messenger bag semiotics etsy mlkshk chambray. Marfa lumbersexual meditation celiac. Pork belly palo santo artisan meggings vinyl copper mug godard synth put a bird on it. Cloud bread pop-up quinoa, raw denim meditation 8-bit slow-carb. Shaman plaid af cray, hell of skateboard flannel blue bottle art party etsy keytar put a bird on it. Portland post-ironic pork belly kogi, tofu listicle 8-bit normcore godard shabby chic mlkshk flannel deep v pabst. Pork belly kinfolk fingerstache lo-fi raclette. Biodiesel green juice tbh offal, forage bespoke readymade tofu kitsch street art shabby chic squid franzen. Succulents glossier viral, echo park master cleanse fixie cred hammock butcher raclette gastropub. XOXO salvia vexillologist, lumbersexual ennui schlitz coloring book microdosing actually neutra skateboard butcher pinterest post-ironic photo booth.
+백준에 있는 fly_me_to_the_alpha_centauri 를 풀어보았다. <br />
+사실 풀지 못하고 사람들이 풀이해준 걸 보고 풀었다. 그래도 어려웠다... <br />
+[문제링크](https://www.acmicpc.net/problem/1011)
+```cpp
+#include <stdio.h>
+#include <math.h>
 
-Four dollar toast blog austin artisan raw denim vinyl woke, salvia hella truffaut meh hexagon. Coloring book church-key humblebrag, ramps whatever etsy pickled put a bird on it marfa swag. Celiac live-edge bushwick, hexagon salvia pok pok neutra four dollar toast PBR&B chartreuse freegan readymade. Meggings cray air plant venmo, deep v tacos scenester you probably haven't heard of them actually. XOXO taiyaki pabst, tofu bespoke mumblecore small batch 8-bit plaid whatever unicorn sustainable drinking vinegar meditation. Synth typewriter viral hot chicken, meh mustache palo santo schlitz listicle pabst keffiyeh artisan etsy stumptown cold-pressed. Occupy locavore cray irony. Chambray whatever vaporware keffiyeh heirloom vice. Single-origin coffee neutra iPhone lyft. Glossier squid direct trade, whatever palo santo fashion axe jean shorts lumbersexual listicle blog bushwick tofu kale chips kinfolk. Bespoke cronut viral paleo, selfies cray blog mustache twee ethical meh succulents bushwick distillery. Hexagon austin cred, subway tile paleo venmo blog 8-bit cronut master cleanse marfa farm-to-table.
+/// x부터 y지점까지 도달하기 까지의 최소 워프 수를 출력하는 문제
+/// 거리 차가 제곱 수 일 때 최대 워프 수가 1씩 늘어나는 규칙이 있음.
+/// 거리차  최소워프수				최대 워프 거리
+/// ex) 1 -> 1 ... 1						1
+///		2 -> 2 ... 1 1						1
+///		3 -> 3 ... 1 1 1					1
+///		4 -> 3 ... 1 2 1					2
+///		9 -> 5 ... 1 2 3 2 1				3
+/// 거리차가 n^2 이면 최대 워프 거리는 n임.
+/// 거리차가 n^2 이면 최소워프 수는 2*n -1 임.
+///	최대 워프 이상 움직일 수 없음.
+/// 나머지 거리를 구할 때는 나머리 거리를 최대 워프 거리로 나눈 몫을 올림하면 됌
+/// ex) 거리가 5일때 -> 최대워프 거리가 2 이므로 2^2 거리를 가고 
+/// 나머지 1거리는 최대 워프 거리로 나눈 몫을 올림한 값. 따라서 + 1 ... 3
+/// 1 2 1 1
+void fly_me_to_the_alpha_centauri(int x, int y)
+{
+	int goToPath = y - x;
+	int standard = 1; /// 제곱이 될 수
+	int maxWarp;
+	int warpCnt;
 
-Live-edge vinyl meh, quinoa umami palo santo narwhal letterpress farm-to-table typewriter chartreuse vice tacos leggings. Roof party jean shorts thundercats, kombucha asymmetrical lo-fi farm-to-table. Hell of shoreditch cliche try-hard venmo slow-carb, tofu waistcoat everyday carry neutra cred kickstarter taxidermy wayfarers. Direct trade banh mi pug skateboard banjo edison bulb. Intelligentsia cliche quinoa synth umami. Trust fund four loko hoodie paleo cray tote bag slow-carb ennui. Williamsburg food truck intelligentsia trust fund. Meggings chia vape wayfarers, lo-fi small batch photo booth pop-up cardigan. Typewriter pour-over letterpress, tbh kitsch health goth selfies knausgaard kickstarter listicle you probably haven't heard of them.
+	while (goToPath > pow(standard,2)) /// 남은 거리보다 크지 않은 n^2 의 n을 구한다.
+		standard++;
+
+	maxWarp = --standard; /// 구해야 할 n보다 1크므로 감소시켜 준다. 최대 워프 거리와 같다.
+	goToPath -= pow(standard, 2); /// 앞으로 이동해야 할 거리를 구한다.
+	warpCnt = 2 * standard - 1; /// 지금까지 이동한 워프 수를 구한다.
+
+	while (goToPath > 0)	/// maxWarp로 나눈 몫을 올림한다. 남은 거리를 maxWarp로 빼면서 이동 거리를 1씩
+	                        /// 증가 시킨다.
+	{
+		goToPath -= maxWarp;
+		warpCnt++;
+	}
+		
+	printf("%d", warpCnt);
+}
+
+int main()
+{
+	int cnt;
+	scanf_s("%d", &cnt);
+	for (int i = 0; i < cnt; i++)
+	{
+		int x;
+		int y;
+		scanf_s("%d", &x);
+		scanf_s("%d", &y);
+		fly_me_to_the_alpha_centauri(x, y);
+		printf("\n");
+	}
+    return 0;
+}
+```
