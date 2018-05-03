@@ -2,14 +2,59 @@
 layout: post
 title: Quick 정렬
 date: 2018-04-20 19:10:20 +0900
-description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
+description: Quick Sort를 직접 구현해보면서 공부하자 # Add post description (optional)
 img: i-rest.jpg # Add image post (optional)
-tags: [Holidays, Hawaii]
+tags: [Algorithm, Programming]
 ---
-Fam locavore snackwave bushwick +1 sartorial. Selfies portland knausgaard synth. Pop-up art party marfa deep v pitchfork subway tile 3 wolf moon. Ennui pinterest tumblr yr, adaptogen succulents copper mug twee. Blog paleo kickstarter roof party blue bottle tattooed polaroid jean shorts man bun lo-fi health goth. Humblebrag occupy polaroid, pinterest aesthetic la croix raw denim kale chips. 3 wolf moon hella church-key XOXO, tbh locavore man braid organic gastropub typewriter. Hoodie woke tumblr dreamcatcher shoreditch XOXO jean shorts yr letterpress mlkshk paleo raw denim iceland before they sold out drinking vinegar. Banh mi aesthetic locavore normcore, gluten-free put a bird on it raclette swag jianbing pop-up echo park gentrify. Stumptown brooklyn godard tumeric ethical. Glossier freegan chicharrones subway tile authentic polaroid typewriter hot chicken. Thundercats small batch heirloom meggings.
+Quick Sort는 정렬하기 위한 배열에서 pivot 요소를 택한 다음 pivot 요소 왼쪽에는 우선순위가 높은 요소, 오른쪽에는 우선순위가 요소로 정렬하는 알고리즘이다. 알고리즘 성능이 O(logN)으로 아주 효과적이다. 구현할 순서는 다음과 같다.
 
-## Plaid ramps kitsch woke pork belly
-90's yr crucifix, selvage 8-bit listicle forage cliche shoreditch hammock microdosing synth. Farm-to-table leggings chambray iPhone, gluten-free twee synth kinfolk umami. Whatever single-origin coffee gluten-free austin everyday carry cliche cred. Plaid ramps kitsch woke pork belly organic. Trust fund whatever coloring book kombucha brooklyn. Sustainable meh vaporware cronut swag shaman lomo, mustache pitchfork selvage thundercats marfa tilde. Fashion axe hashtag skateboard, art party godard pabst bespoke synth vice YOLO master cleanse coloring book kinfolk listicle cornhole. Try-hard mixtape umami fanny pack man bun gastropub franzen tbh. Pickled narwhal health goth green juice mumblecore listicle succulents you probably haven't heard of them raw denim fashion axe shaman coloring book godard. Irony keytar drinking vinegar tilde pork belly pabst iPhone yr craft beer pok pok health goth cliche you probably haven't heard of them kombucha chicharrones. Direct trade hella roof party chia. Coloring book small batch marfa master cleanse meh kickstarter austin kale chips disrupt pork belly. XOXO tumblr migas la croix austin bushwick seitan sartorial jean shorts food truck trust fund semiotics kickstarter brooklyn sustainable. Umami knausgaard mixtape marfa. Trust fund taiyaki tacos deep v tote bag roof party af 3 wolf moon post-ironic stumptown migas.
+1. 피벗 요소를 선택하고 피벗 앞 요소와 배열의 맨 끝 요소를 가리키는 포인터를 정의한다.
+2. 두 포인터가 만날때까지 정렬한다.
+3. 피벗 요소를 정렬된 요소 사이로 옮긴다.
+
+## 1. 피벗 요소를 선택하고 배열을 양쪽을 가리키는 포인터를 정의한다.
+{% highlight cpp %}
+// pivotSort 라고 함수 이름을 정했고 매개변수는 배열과 정수형 데이터 두 개를 받는다.
+// 두 개의 요소는 정렬해야 할 배열 시작과 끝을 가리킨다.
+void pivotSort(int* arr, int left, int right)
+{
+    // 피벗 요소는 정렬 해야 할 배열의 첫 번째 요소로 정한다.
+    int pivot = arr[left];
+    
+    // 피벗 앞과 배열 맨끝을 가리키는 포인터를 정한다.
+    int low = left + 1;
+    int high = right;
+}
+{% endhighlight %}
+
+## 2. 두 포인터가 만날 때까지 정렬한다.
+{% highlight cpp %}
+void pivotSort(int* arr, int left, int right)
+{
+    // 피벗 요소는 정렬 해야 할 배열의 첫 번째 요소로 정한다.
+    int pivot = arr[left];
+    
+    // 피벗 앞과 배열 맨끝을 가리키는 포인터를 정한다.
+    int low = left + 1;
+    int high = right;
+
+    while(low <= high)
+    {
+        while(pivot > arr[low])
+            low++;
+
+        while(pivot < arr[high])
+            high--;
+        
+        if(low <= high)
+        {
+            int temp = arr[low];
+            arr[low] = arr[high];
+            arr[high] = temp;
+        }
+    }
+}
+{% endhighlight %}
 
 ![I and My friends]({{site.baseurl}}/assets/img/we-in-rest.jpg)
 
