@@ -3,7 +3,7 @@ layout: post
 title: fly me to the alpha... 문제풀이
 date: 2018-04-29 12:00:00 +0900
 description: 백준의 문제를 풀어보았다. # Add post description (optional)
-img:  # Add image post (optional)
+img:  we-in-rest.jpg # Add image post (optional)
 tags: [Algorithm, Code] # add tag
 ---
 백준에 있는 fly_me_to_the_alpha_centauri 를 풀어보았다. <br />

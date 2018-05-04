@@ -10,7 +10,9 @@ Quick Sort는 정렬하기 위한 배열에서 pivot 요소를 택한 다음 piv
 
 1. 피벗 요소를 선택하고 피벗 앞 요소와 배열의 맨 끝 요소를 가리키는 포인터를 정의한다.
 2. 두 포인터가 만날때까지 정렬한다.
-3. 피벗 요소를 정렬된 요소 사이로 옮긴다.
+3. 피벗 요소와 우선순위가 가장 높은 요소의 자리를 바꾼다.
+
+이를 재귀적으로 구현한다.
 
 ## 1. 피벗 요소를 선택하고 배열을 양쪽을 가리키는 포인터를 정의한다.
 {% highlight cpp %}
@@ -83,6 +85,4 @@ void pivotSortCall(int* arr, int left, int right)
 }
 
 {% endhighlight %}
-
-![I and My friends]({{site.baseurl}}/assets/img/we-in-rest.jpg)
 
