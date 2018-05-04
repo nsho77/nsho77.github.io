@@ -45,6 +45,10 @@ int pivotSort(int* arr, int left, int right)
     // pivot이 1이고 low는 1이고 high 는 0이 된다.
     // 만약 low 와 high 가 같다면 어떻게 될까?
     // 똑같다 low 와 high가 같아질 때까지 반복하는 이유는 마지막 요소까지 모두 정렬해야 하기 때문이다.
+
+    // 문제1 : 바깥 while을 반복할 때 low, high 가 움직이지 않으며 이후 연산을 반복할 수 있다.
+    // 문제2 : 역순으로 정렬됐을 때 low 가 무한정 늘어날 수 있다.
+    // 문제3 : low가 high 보다 커지면 pivot을 어디나 넣을 것인가.
     while(low <= high)
     {
         while(pivot > arr[low])
@@ -74,7 +78,7 @@ void pivotSortCall(int* arr, int left, int right)
         return;
 
     int pivoted = pivotSort(arr, left, right);
-    pivotSortCall(arr, left, pivoted);
+    pivotSortCall(arr, left, pivoted-1);
     pivotSortCall(arr, pivoted+1, right);
 }
 
