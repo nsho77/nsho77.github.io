@@ -44,13 +44,16 @@ int pivotSort(int* arr, int left, int right)
     // 왼쪽에서는 pivot 보다 우선순위가 낮은 데이터를 찾고
     // 오른쪽에서는 pivot 보다 우선순위가 높은 데이터를 찾는다.
     // 만약 1,2,3,4,5,6,7 이면...
-    // pivot이 1이고 low는 1이고 high 는 0이 된다.
+    // pivot이 1이면 low는 6+이고 high 는 0이 된다.
+    // pivot과 high를 바꾸니 바뀌지 않는다..
     // 만약 low 와 high 가 같다면 어떻게 될까?
     // 똑같다 low 와 high가 같아질 때까지 반복하는 이유는 마지막 요소까지 모두 정렬해야 하기 때문이다.
 
     // 문제1 : 바깥 while을 반복할 때 low, high 가 움직이지 않으며 이후 연산을 반복할 수 있다.
-    // 문제2 : 역순으로 정렬됐을 때 low 가 무한정 늘어날 수 있다.
-    // 문제3 : low가 high 보다 커지면 pivot을 어디나 넣을 것인가.
+    // (while 문 안의 if 덕분에 이런 경우가 생기지 않는다. low 와 high를 교환했다면 low가 늘어나고 high는 줄어들기 때문이다.)
+    // 문제2 : 역순으로 정렬됐을 때 low 가 무한정 늘어날 수 있다.( debug 해본 결과 배열 크기보다 늘어나지만 무한정 늘어나지 않는다.)
+    // 문제3 : low가 high 보다 커지면 pivot을 어디나 넣을 것인가. 
+    // ( 이 문제제기는 잘 못 되었다. pivot을 low와 high 사이에 넣는 게 아니라 pivot과 high를 교환하는 것이다.)
     while(low <= high)
     {
         while(pivot > arr[low])
