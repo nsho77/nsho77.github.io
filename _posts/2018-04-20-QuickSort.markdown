@@ -69,16 +69,45 @@ int pivotSort(int* arr, int left, int right)
             arr[high] = temp;
         }
     }
+   ...
+}
+{% endhighlight %}
+
+## 3. 피벗 요소와 우선순위가 가장 높은 요소의 자리를 바꾼다.
+{% highlight cpp %}
+int pivotSort(int* arr, int left, int right)
+{
+    int pivot = arr[left];
+    int low = left + 1;
+    int high = right;
+
+    while(left <= right)
+    {
+        while(pivot > arr[low])
+            low++;
+        while(pivot < arr[high])
+            high--;
+        
+        if(low<=high)
+        {
+            int temp = arr[low];
+            arr[low] = arr[high];
+            arr[high] = temp;
+        }
+    }
+    // 피벗 요소와 우선순위가 가장 높은 요소의 자리를 바꾼다.
     int temp = arr[left];
     arr[left] = arr[high];
     arr[high] = temp;
 
     return high; 
 }
-
 // pivotSort 함수를 호출한다.
 void pivotSortCall(int* arr, int left, int right)
 {
+    // 재귀적으로 호출한다
+    // 먼저 pivot을 하고 나누고 pivot 하는 과정을 거친다.
+
     if(left > right)
         return;
 
