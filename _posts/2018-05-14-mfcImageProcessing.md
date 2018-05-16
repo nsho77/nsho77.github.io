@@ -105,7 +105,14 @@ void CImageProcessingView::OnDraw(CDC* pDC)
 
 > 위의 코드는 화면에 그리기 위한 필요코드이다.
 
+이미지 파일을 불러와 화면에 띄우는 과정은 다음과 같다.<br />
+
+- Doc 에서 View의 함수에 접근하여 띄운다.
+- Doc 에서 넘겨받은 정보로 이미지 정보를 셋팅한다.
+- 화면에 이미지를 그린다.
+
 화면에 그림을 그리기 위해 데이터를 셋팅하는 로직을 봐보자.
+
 {% highlight cpp %}
 // 먼저 ImageProcessingView.h 에 함수를 선언한다.
 public:
@@ -132,6 +139,32 @@ void CImageProcessingView::SetDrawImage(unsigned char* image, const int width, c
     // 그리려는 이미지의 픽셀당 바이트 수에 따라
     // 알맞게 할당해준다.
     if(byte > 1)
+    {
+        // image는 width*height 만큼의 픽셀이고
+        // 1픽셀은 byte 만큼을 가진다.
+        for(int i=0; i<width*height; i++)
+        {
+            m_Image[i*4+0] = image[i*byte+0];
+            m_Image[i*4+1] = image[i*byte+1];
+            m_Image[i*4+2] = image[i*byte+2];
+        }
+    }
+    else
+    {
+        // 흑백 image는 1픽셀에 1byte이다.
+        for(int i=0; i< width*height; i++)
+        {
+            m_Image[i*4+0] = image[i];
+            m_Image[i*4+1] = image[i];
+            m_Image[i*4+2] = image[i];
+        }
+    }
 }
+{% endhighlight %}
+
+
+Doc에서 파일을 읽어와 image 정보 셋팅 함수에 인자를 전달하는 함수를 살펴보자
+{% highlight cpp %}
+
 {% endhighlight %}
 
