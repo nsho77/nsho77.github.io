@@ -165,6 +165,38 @@ void CImageProcessingView::SetDrawImage(unsigned char* image, const int width, c
 
 Doc에서 파일을 읽어와 image 정보 셋팅 함수에 인자를 전달하는 함수를 살펴보자
 {% highlight cpp %}
+bool CImageProcessingView::ReadImageFile(CString filename,
+    unsigned char*& output, int& width, int& height, int& byte)
+{
+    // CBitmap 구조체가 하는 일은 무엇?
+    // LoadImage() 가 하는 역할은 무엇?
+    CBitmap Bitmap;
+    Bitmap.m_hObject = 
+        (HBITMAP)::LoadImage(NULL, filename, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+    
+    if(!Bitmap.m_hObject) return false;
 
+    // BITMAP 구조체가 하는 일은 무엇?
+    BITMAP bm;
+    Bitmap.GetBitmap(&bm);
+
+    // DWORD 구조체의 역할은 무엇?
+    DWORD dwCount = bm.bmWidthBytes*bm.bmHeight;
+
+    // 메모리 할당
+    output = new unsigend char[dwCount];
+
+    //GetBitmapBits() 가 하는 역할은? output 공간에 dwCount 만큼 bitmap을 생성
+    DWORD dwRead = Bitmap.GetBitmapBits(dwCount, output);
+
+    // output의 그림을 컴퓨터 화면에 띄우기 위해 세팅한다.
+    // bmBitsPixel / 8 이유는? byte 가 아니라 bit로 표시돼서.
+    SetDrawImage(output, bm.bmWidth, bm.bmHeight, bm.bmBitsPixel/8);
+
+    // 밖으로 빼낼 정보를 세팅한다.
+    width = bm.bmWidth;
+    height = bm.bmHeight;
+    byte = bm.bmBitsPixel / 8;
+}
 {% endhighlight %}
 
