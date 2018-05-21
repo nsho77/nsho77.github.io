@@ -200,3 +200,110 @@ bool CImageProcessingView::ReadImageFile(CString filename,
 }
 {% endhighlight %}
 
+지금까지 이미지를 띄우는 윈도우를 만들어서 화면에 띄우기 위한 셋팅을 살펴보았다.
+이제 윈도우에서 파일을 열어서 해당 사진을 화면에 뿌려주는 기능을 구현해보자.
+먼저 클래스 및 구조체를 헤더파일에 정의하자.
+{% highlight cpp %}
+
+# include "ImageProc.h" // 여기에 있는 함수를 사용할 것.
+# include <vector> // vector 를 사용하여 배열을 선언할 것.
+
+// 배열에 저장할 IMAGE 구조체를 정의한다.
+struct IMAGE
+{
+    unsigned char* image;
+    int width;
+    int height;
+    int pixel_byte;
+
+    IMAGE(void)
+    {
+        image= nullptr;
+        width = 0;
+        height = 0;
+        pixel_byre = 0;
+    }
+
+    IMAGE(unsigned char* _image, int _width, int _height, int _pixel_byte)
+    {
+        image= _image;
+        width = _width;
+        height = _height;
+        pixel_byre = _pixel_byte;
+    }
+}
+
+class CImageProcessingDoc : public CDocument
+{
+    protected:
+        CImageProcessingDoc();
+        DECLARE_DYNCREATE(CImageProcessingDoc)
+    
+    private:
+        vector<IMAGE> m_Images; // IMAGE를 담을 배열을 선언한다.
+        int cur_index; // 현재 인덱스를 저장할 변수를 선언한다.
+
+    // 재정의
+    public:
+        virtual BOOL OnNewDocument();
+        virtual void Serialize(CArchive& ar); 
+        ...
+
+    public:
+        virtual ~CImageProcessingDoc();
+        ...
+    
+    // 이벤트처리기 선언
+    public:
+        afx_msg void OnFileOpen();
+    
+}
+{% endhighlight %}
+
+{% highlight cpp %}
+// 파일 열기에 아래의 이벤트를 달아준다.
+void CImageProcessingDoc::onFileOpen()
+char szFilter[] = "Image (*.BMP, *.JPG, *.PNG) | *.BMP;*.JPG;*.PNG | All Files(*.*)|*.*||";
+
+// fileOpen dialog 를 띄운다.
+CFileDialog dlg(TRUE, NULL, NULL, OFN_HIDERANDONLY, szFilter);
+
+if(IDOK == dlg.DoModal())
+{   
+    // 파일의 경로를 읽어오기
+    CString strPathName = dlg.GetPathName();
+
+    // Doc 에서 View의 포인터 얻어오기
+    CImageProcessingView* pView = (CImageProcessingView*)((CMainFrame*)
+    (AfxGetApp()->m_pMainWnd)) -> GetActiveView();
+
+    unsigned char* image = nullptr;
+    int width=0, height=0, byte=0;
+
+    if(pView->ReadImageFile(strPathName, image, width, height, byte))
+    {
+        printf("open success\n");
+
+        // open 이 성공적으로 되면..
+        // image를 배열에 저장한다.
+
+        IMAGE image_info = IMAGE(image, width, height, byte);
+        m_Images.push_back(image_info);
+
+        // index는 배열의 사이즈 -1 로 구했다. 
+        cur_index = static_cast<int>(m_Images.size() -1 );
+
+        // View pointer를 얻는다.
+        CImageProcessingView* pView = (CImageProcessingView*)((CMainFrame*)(AfxGetApp()->m_pMainWnd))->GetActiveView();
+
+        // 화면상에 현재 불러온 이미지를 그려준다.
+        pView->SetDrawImage(image, m_Images[cur_index].width, m_Images[cur_index].height);
+        // update를 해줘야 다시 그려준다.
+        pView->OnInitialUpdate();
+    }
+    else
+        printf("open fail\n");
+        
+    }
+}
+{% endhighlight%}
