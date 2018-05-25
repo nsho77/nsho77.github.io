@@ -6,7 +6,7 @@ description: mfc imageprocessing next 이벤트를 달자 # Add post description
 img:  # Add image post (optional)
 ---
 
-기존 ImageProcessing [작업](./2018-05-14-mfcImageProcessing.md)는 파일 다이얼로그에서 이미지 파일을 읽은 뒤 해당 함수에서 이미지를 세팅하는 함수를 호출하는 구조였다. (아래코드 참조)
+기존 ImageProcessing [작업](../mfcImageProcessing)은 파일 다이얼로그에서 이미지 파일을 읽은 뒤 해당 함수에서 이미지를 세팅하는 함수를 호출하는 구조였다. (아래코드 참조)
 {% highlight cpp %}
 bool CImageProcessingView::ReadImageFile(CString filename,
 	unsigned char*& output, int& width, int& height, int& byte)
@@ -77,7 +77,7 @@ bool CImageProcessingView::ReadImageFile(CString filename,
 이제 간단히 next 아이콘을 클릭 하면 다음 이미지가 그려지는 기능을 추가해보자.
 ImageProcessingDoc.h, ImageProcessingDoc.cpp 에 다음과 같은 이벤트처리기를 만든다.
 
->> ImageProcessingDoc.h
+> ImageProcessingDoc.h
 {% highlight cpp %}
 ...
 public:
@@ -85,7 +85,7 @@ public:
 ...
 {% endhighlight %}
 
->> ImageProcessingDoc.cpp
+> ImageProcessingDoc.cpp
 {% highlight cpp %}
 void OnNextImage()
 {
