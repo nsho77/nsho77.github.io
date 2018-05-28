@@ -263,6 +263,7 @@ class CImageProcessingDoc : public CDocument
 {% highlight cpp %}
 // 파일 열기에 아래의 이벤트를 달아준다.
 void CImageProcessingDoc::onFileOpen()
+{
 char szFilter[] = "Image (*.BMP, *.JPG, *.PNG) | *.BMP;*.JPG;*.PNG | All Files(*.*)|*.*||";
 
 // fileOpen dialog 를 띄운다.

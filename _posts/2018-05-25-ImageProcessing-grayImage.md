@@ -65,19 +65,25 @@ void CImageProcessingView::SetDrawImage(unsigned char* image, unsigned char* ima
 	// 화면을 두 배로 써야 하기 때문에 *2를 해준다.
     m_Image = new unsigned char[width*2*height*4];
 
-    for(int i=0; i<width*height; i++)
+    for(int i=0; i<width; i++)
     {
-        m_Image[i*4 + 0] = image[i*4 + 0];
-        m_Image[i*4 + 1] = image[i*4 + 1];
-        m_Image[i*4 + 2] = image[i*4 + 2];
+		for(int j=0; j<height; j++)
+		{
+			m_Image[(m_ImgWidth*j+i)*4 + 0] = image[(width*j+i)*4 + 0];
+        	m_Image[(m_ImgWidth*j+i)*4 + 1] = image[(width*j+i)*4 + 1];
+        	m_Image[(m_ImgWidth*j+i)*4 + 2] = image[(width*j+i)*4 + 2];
+		}
     }
 
 	// color image 다음에 gray image 가 나오므로 + width 를 한다.
-    for(int i=0; i<width*height; i++)
+    for(int i=0; i<width; i++)
     {
-        m_Image[i*4 + width + 0] = image_gray[i*4];
-		m_Image[i*4 + width + 1] = image_gray[i*4];
-		m_Image[i*4 + width + 2] = image_gray[i*4];
+		for(int j=0; j<height; j++)
+		{
+			m_Image[(m_ImgWidth*j+i+width)*4 + 0] = image_gray[width*j+i];
+			m_Image[i*4 + width + 1] = image_gray[width*j+i];
+			m_Image[i*4 + width + 2] = image_gray[width*j+i];
+		}
     }
 }
 {% endhighlight %}
@@ -97,9 +103,92 @@ void ImageProc::MergeChannels(unsigned char* in_color,
 {% endhighlight %}
 
 이제 Doc 에 이벤트 처리기를 만들면 되는데, 파일을 오픈할때 gray 처리를 해서 color와 함께 출력되게 만들자.
+gray image 도 데이터 저장을 해야하므로 IMAGE 구조체를 먼저 수정하자.
+{% highlight cpp %}
+// ImageProcessingDoc.h 임.
+#include <vector>
+using namespace std;
+
+struct IMAGE
+{
+	unsigned char* image_color;
+	unsigned char* image_gray;
+	int width;
+	int height;
+	int pixel_byte;
+	// gray image 가 binary 처리 되었는가?
+	bool bGrayBinary;
+
+	IMAGE(unsigned char* _color, unsigned char* _gray, int _width,
+		int _height, int _pixel_byte)
+	{
+		image_color = nullptr;
+		image_gray = nullptr;
+		width = 0;
+		height = 0;
+		pixel_byte = 0;
+		bGrayBinary = false;
+	}
+
+	IMAGE(unsigned char* _color, unsigned char* _gray, int _width,
+		int _height, int _pixel_byte)
+	{
+		image_color = _color;
+		image_gray = _gray;
+		width = _width;
+		height = _height;
+		pixel_byte = _pixel_byte;
+		bGrayBinary = false;
+	}
+}
+
+// 클래스에 이미지들을 저장할 백터배열과 인덱스를 만든다.
+class CImageProcessingDoc() : public CDocument
+{
+	...
+public :
+	vector <IMAGE> m_Images;
+	int cur_index;
+}
+{% endhighlight %}
+
+이제 File Open 했을 때 이벤트 처리 기능을 구현해보자.
 {% highlight cpp %}
 void CImageProcessingDoc::OnFileOpen()
 {
-	
+	TCHAR szFilter[] = _T("Image (*.BMP, *.GIF, *.JPG, *.PNG) | *.BMP;*.GIF;*.JPG;*.PNG; |
+		All Files(*.*)|*.*||");
+	CFileDialog dlg(TRUE, NULL, NULL, OFN_HIDEREADONLY, szFilter);
+
+	if(IDOK == dlg.DoModal())
+	{
+		CString strPathName =dlg.GetPathName();
+
+		CImageProcessingView* pView = (CImageProcessingView*)((CMainFrame*)(AfxGetApp()->m_pMainWnd))->GetActiveView();
+
+		unsigned char* img = nullptr;
+		int width, height, byte = 0;
+
+		if(pView->ReadImageFile(strPathName, img, width, height, byte))
+		{
+			printf("open success\n");
+
+			// gray image 버퍼를 만들고 이미지를 저장한다.
+			unsigned char* image_gray = new unsigned char[width*height];
+			ImageProc::MergeChannels(img, image_gray, width, height);
+
+			// IMAGE 변수를 만들고 데이터를 저장한뒤 배열에 저장한다.
+			IMAGE image_info = IMAGE(img, image_gray, width, height, 4);
+			m_Images.push_back(image_info);
+			cur_index = static_cast<int>(m_Images.size() -1) ;
+
+			// 현재 이미지를 화면에 뿌린다.
+			pView->setDrawImage(img, image_gray, m_Images[cur_index].width, m_Images[cur_index].height);
+
+			// 화면을 update 한다.
+			pView->OnInitialUpdate();
+
+		}
+	}
 }
 {% endhighlight %}
