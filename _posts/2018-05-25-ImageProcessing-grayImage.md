@@ -192,3 +192,5 @@ void CImageProcessingDoc::OnFileOpen()
 	}
 }
 {% endhighlight %}
+
+실행 시키면 칼라이미지와 흑백이미지가 함께 뜬다.
