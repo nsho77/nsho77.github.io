@@ -3,7 +3,7 @@ layout: post
 title: mfc-imageProcessing 바이너리 이미지를 만들어보자
 date: 2018-05-29 17:00:00 +0900
 description: mfc imageprocessing 다양한 이미지 작업을 알아보자 # Add post description (optional)
-img:  /imageProcessing/panda.bmp # Add image post (optional)
+img:  # Add image post (optional)
 tags: [development, imageProcessing]
 ---
 
