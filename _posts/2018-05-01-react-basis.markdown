@@ -4,6 +4,7 @@ title: "[번역글] All the fundamental React.js concepts, jammed into this sing
 date: 2018-05-01 10:40:00 +0900
 description: medium 에서 올라온 글을 번역했다. 리액트에 관한 내용 # Add post description (optional)
 img:  # Add image post (optional)
+tags: [development, translate]
 ---
 
 >medium 에 올라온 [글](https://medium.freecodecamp.org/all-the-fundamental-react-js-concepts-jammed-into-this-single-medium-article-c83f9b53eac2)을 번역해 보았다. 오역이 많을 거 같다.
