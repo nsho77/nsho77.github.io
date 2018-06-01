@@ -215,7 +215,16 @@ $('.answer').click(function(){
 
     // data contains the data from the server
     $.get('/comboMeal', meal, function(data){
-        
+        eat(data);
     })
 })
 {% endhighlight %}
+
+마지막 제품인 데이터는 이론적으로 3개의 콤보 밀일 것이다. 백엔드에서 처리하는 방식에 따라 달라진다.
+
+![get callback]({{"https://cdn-images-1.medium.com/max/800/0*CmjCchSTgQN7L6Bg."}})
+
+
+## 다른 예 찾아보기
+
+다른 예들도 찾아보자. (끝)
