@@ -270,12 +270,16 @@ void ImageProc::UserMaskingDivide(unsigned char* image_color,
 {
     unsigned char* mask = new unsigned char[width*height];
     int changePoint = height / 16;
+    int bBlack = -1;
 
     for(int j=0; j<height; j++)
     {
+        if(j % changePoint == 0)
+            bBlack *= -1;
+
         for(int i=0; i<width; i++)
         {
-            if(j % changePoint == 0)
+            if(bBlack == 1)
                 mask[width*j + i] = 0;
             else
                 mask[width*j + i] = 1;
@@ -293,3 +297,156 @@ void ImageProc::UserMaskingDivide(unsigned char* image_color,
     
 }
 {% endhighlight %}
+
+이벤트 처리기를 만들자.
+> ImageProcessingDoc.h
+{% highlight cpp %}
+class CImageProcessingDoc:public CDocument
+{
+    ...
+public:
+    afx_msg void OnUsermasking2Divide();
+}
+{% endhighlight %}
+
+> ImageProcessingDoc.cpp
+{% highlight cpp %}
+void CImageProcessingDoc::OnUsermasking2Divide()
+{
+    ImageProc::UserMaskingDivide(m_Images[cur_index].image_color, 
+		m_Images[cur_index].width, m_Images[cur_index].height);
+	ImageProc::MergeChannels(m_Images[cur_index].image_color,
+		m_Images[cur_index].image_gray,m_Images[cur_index].width, m_Images[cur_index].height);
+
+	CImageProcessingView* pView = (CImageProcessingView*)((CMainFrame*)(AfxGetApp()->m_pMainWnd))->GetActiveView();
+
+	pView->SetDrawImage(m_Images[cur_index].image_color, m_Images[cur_index].image_gray,
+		m_Images[cur_index].width, m_Images[cur_index].height);
+
+	pView->OnInitialUpdate();
+}
+{% endhighlight %}
+
+실행하면 아래와 같이 보인다
+![userMaskingDivide-jy]({{"/assets/img/imageProcessing/userMaskingDivide-jy.jpg"}})
+
+위 마스킹을 RGB 별로 각각 적용해보자.
+
+> ImageProc.h
+{% highlight cpp %}
+class ImageProc
+{
+    ...
+public:
+    static void UserMaskingCUD(unsigned char* image_color,
+        const int width, const int height);
+}
+{% endhighlight %}
+
+> ImageProc.cpp
+{% highlight cpp %}
+void ImageProc::UserMaskingCUD(unsigned char* image_color,
+    const int width, const int height)
+{
+	// mask_circle
+	float* mask_circle = new float[width*height];
+	int centerX = width / 2;
+	int centerY = height / 2;
+	float distanceFromCenterX = 0.f;
+	float distanceFromCenterY = 0.f;
+	float distanceFromCenter = 0.f;
+
+	// 중심으로 부터 거리를 구하고
+	// 거리에 비례해 mask 값을 채운다.
+	for (int j = 0; j < height; j++)
+	{
+		for (int i = 0; i < width; i++)
+		{
+			distanceFromCenterX = fabsf((static_cast<float>(i) - centerX));
+			distanceFromCenterY = fabsf((static_cast<float>(j) - centerY));
+			distanceFromCenter = sqrt((distanceFromCenterX*distanceFromCenterX)
+				+ (distanceFromCenterY*distanceFromCenterY));
+
+			mask_circle[width*j + i] = ((width / 2) - distanceFromCenter) / (width / 2);
+			if (mask_circle[width*j + i] < 0)
+				mask_circle[width*j + i] = 0;
+		}
+	}
+
+
+	// mask_updown
+	float* mask_updown = new float[width*height];
+
+	for (int j = 0; j < height; j++)
+	{
+		for (int i = 0; i < width; i++)
+		{
+			mask_updown[width*j + i] = static_cast<float>(height - j) /
+				static_cast<float>(height);
+		}
+	}
+
+	// mask_divide
+	unsigned char* mask_divide = new unsigned char[width*height];
+	int changePoint = height / 16;
+	int bZero = -1;
+
+	for (int j = 0; j<height; j++)
+	{
+		if (j % changePoint == 0)
+			bZero *= (-1);
+
+		for (int i = 0; i<width; i++)
+		{
+			if (bZero == 1)
+				mask_divide[width*j + i] = 0;
+			else
+				mask_divide[width*j + i] = 1;
+		}
+	}
+
+	// masking
+	for (int i = 0; i < width*height; i++)
+	{
+		image_color[i * 4 + 0] *= mask_updown[i];
+		image_color[i * 4 + 1] *= mask_divide[i];
+		image_color[i * 4 + 2] *= mask_circle[i];
+	}
+
+	delete[] mask_circle;
+	delete[] mask_updown;
+	delete[] mask_divide;
+}
+{% endhighlight %}
+
+이벤트 처리기를 만들자.
+> ImageProcessingDoc.h
+{% highlight cpp %}
+class CImageProcessingDoc:public CDocument
+{
+    ...
+public:
+    afx_msg void OnUsermasking2Cud();
+}
+{% endhighlight %}
+
+> ImageProcessingDoc.cpp
+{% highlight cpp %}
+void CImageProcessingDoc::OnUsermasking2Cud()
+{
+    ImageProc::UserMaskingCUD(m_Images[cur_index].image_color, 
+		m_Images[cur_index].width, m_Images[cur_index].height);
+	ImageProc::MergeChannels(m_Images[cur_index].image_color,
+		m_Images[cur_index].image_gray,m_Images[cur_index].width, m_Images[cur_index].height);
+
+	CImageProcessingView* pView = (CImageProcessingView*)((CMainFrame*)(AfxGetApp()->m_pMainWnd))->GetActiveView();
+
+	pView->SetDrawImage(m_Images[cur_index].image_color, m_Images[cur_index].image_gray,
+		m_Images[cur_index].width, m_Images[cur_index].height);
+
+	pView->OnInitialUpdate();
+}
+{% endhighlight %}
+
+실행하면 아래와 같이 보인다
+![userMaskingCUD-jy]({{"/assets/img/imageProcessing/userMaskingCUD-jy.jpg"}})
