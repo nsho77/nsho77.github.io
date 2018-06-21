@@ -157,7 +157,7 @@ class CImageProcessingDoc : public CDocument
 {% endhighlight %}
 
 > ImageProcessingDoc.cpp
-{% highlihgt cpp %}
+{% highlight cpp %}
 ...
 LARGE_INTEGER Frequency;
 LARGE_INTEGER BeginTime;
