@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ImageProcessing 기술을 이용하여 적혈구 숫자를 세보자
-date: 2018-06-27 14:45:00 +0900
+date: 2018-06-28 14:45:00 +0900
 description: mfc imageprocessing region growing 작업을 알아보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing]
