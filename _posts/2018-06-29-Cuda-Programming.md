@@ -218,3 +218,9 @@ __global__ void addKernel(int* c, const int* a, const int* b)
     c[i] = a[i] + b[i];
 }
 {% endhighlight %}
+
+위 함수에서 threadIdx.x 는 각 thread의 index 정보이다.
+thread index는 배열 index 마다 할당 되어있다. 따라서 반복문 필요없이 한번에 계산할 수 있다.
+
+CUDA에서 자주 등장하는 개념인 thread, block, grid 에 대한 개념과
+커널 함수에 붙어있는 __global__ 을 포함한 지시어는 다음 글에서 다루도록 하겠다.
