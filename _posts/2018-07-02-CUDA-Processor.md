@@ -65,3 +65,12 @@ GirdDim.y = (Data_height + blockDim.y -1) / blockDim.y
 CUDA thread 자신의 Index를 알고 있는데 이는 block 내 상대적인 위치이다.
 따라서 절대적인 위치를 알기 위해서 다음과 같이 생각할 필요가 있다.
 block index를 알고 있고 blockDim 을 알고 있으므로 threadIndex.x의 절대값을 구하면 blockDim.x*blockIdx.x + threadIndex.x y좌표도 마찬가지로 blockDim.y*blockIdx.y + threadIndex.y 이다.
+
+## __global, __device__ 의 차이에 대해 알아보자
+
+CUDA 프로그래밍 소스를 보면 함수 앞에 __global__, __device__ 와 같은 키워드가 붙은 것을 볼 수 있다.
+__global__ 이 붙은 함수는 호스트(CPU)에서 호출할 수 있고 디바이스(GPU)에서 호출 할 수 없다. 디바이스에서 실행된다.
+__device__ 이 붙은 함수는 호스트(CPU)에서 호출할 수 없고 디바이스(GPU)에서 호출 할 수 있다. 디바이스에서 실행된다.
+
+__global__ 함수에서는 __device__ 함수를 호출 할 수 있다. __global__ 함수는 다른 말로 커널 함수라고 한다.
+지시어가 붙지 않은 모든 함수는 __host__ 지시어가 생략된 것이다.
