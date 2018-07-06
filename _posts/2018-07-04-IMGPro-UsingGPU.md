@@ -142,7 +142,7 @@ int ImageProc_DeAllocGPUMemory(void)
 
 	return 1;
 }
-{% endghighlight %}
+{% endhighlight %}
 
 ImageProc에 메모리를 할당하고 반환하는 작업을 도와줄 함수를 만들어보자.
 
@@ -190,5 +190,193 @@ bool ImageProc::DeAllocateGPUMemory(void)
 이제 Adaptive Binarization 수행하는 기능을 만들어보자.
 > CUDAImageProc.cu
 {% highlight cpp %}
+extern "C"
+int ImageProc_AdaptiveBinarization(unsigned char* image_gray,
+	int width, int height, int ksize)
+{
+	// GPU에 메모리 할당하고 0으로 세팅한다.
+	if (ImageProc_AllocGPUMemory(width, height) < 0)
+		return -1;
 
+	// GPU 메모리에 호스트 데이터 복사한다.
+	cudaError cudaStatus;
+	cudaStatus = cudaMemcpy(g_tempBuffer[0],image_gray,
+		sizeof(unsigned char)*width*height, cudaMemcpyHostToDevice);
+	if (cudaStatus != cudaSuccess)
+		return -2;
+
+	// 커널 함수를 실행한다.
+	// GridDim.x, GridDim.y, BlockDim.x, BlockDim.y 를 정의한다.
+	dim3 Db = dim3(8,8);
+	dim3 Dg = dim3((width + Db.x - 1) / Db.x, (height + Db.y - 1) / Db.y);
+	Kernel_AdaptiveBinarization<<< Dg, Db >>> (g_tempBuffer[0],
+		g_tempBuffer[1],width,height,ksize);
+
+	// 커널 함수 실행이 제대로 되었는지 확인한다.
+	cudaStatus = cudaGetLastError();
+	if (cudaStatus != cudaSuccess)
+		return -3;
+
+
+	// 커널 함수 모두 종료를 확인한다.
+	cudaStatus = cudaDeviceSynchronize();
+	if (cudaStatus != cudaSuccess)
+		return -4;
+
+	// 결과를 호스트 메모리로 복사한다.
+	cudaStatus = cudaMemcpy(image_gray, g_tempBuffer[1],
+		sizeof(unsigned char)*width*height, cudaMemcpyDeviceToHost);
+	if (cudaStatus != cudaSuccess)
+		return -5;
+
+	return 1;
+	
+}
 {% endhighlight %}
+
+커널함수를 정의한다. 블락 index와 thread index 를 이용해 절대 thread index를 알아내는 것이 관건이다.
+> CUDAImageProc.cu
+
+{% highlight cpp %}
+__global__ void Kernel_AdaptiveBinarization(unsigned char* image_gray,
+	unsigned char* output_image, int width, int height, int ksize)
+{
+	if (ksize == 1 || ksize % 2 == 0) return;
+	int neighbor = ksize / 2;
+	// blockIdx, blockDim, threadIdx 로 좌표를 찾는다.
+	// blockDim 은 block 사이즈 이므로 아래와 같이 좌표를 구할 수 있다.
+	int i = blockIdx.x*blockDim.x+threadIdx.x;
+	int j = blockIdx.y*blockDim.y+threadIdx.y;
+
+	float avg = 0.f;
+	float cnt = 0.f;
+
+	for (int x = -neighbor; x <= neighbor; x++)
+	{
+		for (int y = -neighbor; y <= neighbor; y++)
+		{
+			if (i + x < 0 || i + x >= width || j + y < 0 || j + y >= height)
+				continue;
+			avg += image_gray[width*(j + y) + (i + x)];
+			cnt += 1.f;
+		}
+	}
+	avg = avg / cnt;
+	if (image_gray[width*j + i] > avg)
+		output_image[width*j + i] = 255;
+	else
+		output_image[width*j + i] = 0;
+}
+{% endhighlight %}
+
+ImageProc.cpp 에 위 기능을 사용할 수 있는 함수를 정의하자
+> ImageProc.h
+{% highlight cpp %}
+extern "C"
+{
+	...
+	int ImageProc_AdaptiveBinarization(image_gray,width,height,ksize);
+}
+...
+// ImageProc 에서 정의할 함수도 선언한다. .. 생략.
+{% endhighlight %}
+
+> ImageProc.cpp
+{% highlight cpp %}
+bool ImageProc::GPU_AdaptiveBinarization(unsigned char* image_gray,
+	int width, int height, int ksize)
+{
+	printf("GPU_AdaptiveBinarization\n");
+	int res = ImageProc_AdaptiveBinarization(image_gray, width, height, ksize);
+	if (res < 0)
+	{
+		printf("GPU_AdaptiveBinarization failed error code is %d \n,",res);
+		return false;
+	}
+	else
+		return true;
+}
+{% endhighlight %}
+
+이벤트 처리기를 단다. 기존과 다르게 사용할 ImageProc 함수가 static 이 아니기 때문에
+ImageProc 객체를 만들어서 사용한다.
+
+> ImageProcessingDoc.h
+{% highlight cpp %}
+class CImageProcessingDoc: public CDocument
+{
+public:
+	// ImageProc 객체를 참조하는 변수를 선언
+	ImageProc* obj_ImageProc;
+}
+{% endhighlight %}
+
+Doc 클래스가 생성될 때 초기화하고, 소멸할 때 반환하며
+새로운 Document가 생성될 때 기존 객체를 삭제하고 새로운 객체를 생성한다.
+> ImageProcessingDoc.cpp
+{% highlight cpp %}
+CImageProcessingDoc::CImageProcessingDoc()
+{
+	// TODO: 여기에 일회성 생성 코드를 추가합니다.
+	...
+	obj_ImageProc = nullptr;
+}
+
+CImageProcessingDoc::~CImageProcessingDoc()
+{
+	...
+	if (obj_ImageProc)
+		delete obj_ImageProc;
+}
+
+BOOL CImageProcessingDoc::OnNewDocument()
+{
+	if (!CDocument::OnNewDocument())
+		return FALSE;
+
+	if (obj_ImageProc)
+		delete obj_ImageProc;
+	obj_ImageProc = new ImageProc;
+
+	return TRUE;
+}
+{% endhighlight %}
+
+이벤트 처리기를 달고 시간을 측정해보자
+> ImageProcessingDoc.cpp
+{% highlight cpp %}
+void CImageProcessingDoc::OnImageprocessinggpuAdaptivebinarization()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	printf("OnImageprocessing GPU Adaptivebinarization\n");
+
+	QueryPerformanceFrequency(&Frequency);
+	QueryPerformanceCounter(&BeginTime);
+
+	obj_ImageProc->GPU_AdaptiveBinarization(m_Images[cur_index].image_gray,
+		m_Images[cur_index].width, m_Images[cur_index].height, 87);
+
+	QueryPerformanceCounter(&Endtime);
+	int elapsed = Endtime.QuadPart - BeginTime.QuadPart;
+	double duringtime = (double)elapsed / (double)Frequency.QuadPart;
+	printf("GPU AdaptiveBinarization time : %f\n", duringtime);
+
+	// GPU Memory DeAllocation
+	obj_ImageProc->DeAllocateGPUMemory();
+
+
+	CImageProcessingView* pView = (CImageProcessingView*)((CMainFrame*)(AfxGetApp()->m_pMainWnd))->GetActiveView();
+
+	pView->SetDrawImage(m_Images[cur_index].image_color, m_Images[cur_index].image_gray,
+		m_Images[cur_index].width, m_Images[cur_index].height, 1);
+
+	pView->OnInitialUpdate();
+}
+{% endhighlight %}
+
+실행하면 다음 그림과 같이 되고
+![adaptiveBinarization-hijy]({{"/assets/img/CUDA/adaptiveBinarization-hijy.jpg"}})
+
+시간은 CUDA 프로그래밍 적용 했을 때 : 2.74454초    
+CUDA 프로그래밍 적용 하지 않았을 때 : 7.01979초    
+로 CUDA 프로그래밍이 더 빠른 것을 확인 할 수 있다.

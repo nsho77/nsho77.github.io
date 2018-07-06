@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cuda 프로세서에 대해 알아보자
+title: CUDA 이용하여 행렬 곱셈을 해보자
 date: 2018-07-03 09:00:00 +0900
 description: Cuda Progamming # Add post description (optional)
 img:  # Add image post (optional)
