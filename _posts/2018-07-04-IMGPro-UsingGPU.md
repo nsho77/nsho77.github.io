@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ImageProcessing 에 사용된 기술을 GPU로 처리해보자
+title: ImageProcessing 에 사용된 기술(Adaptive Binarization)을 GPU로 처리해보자
 date: 2018-07-04 10:00:00 +0900
 description: image processing 을 gpu를 이용해 처리해보자 # Add post description (optional)
 img:  # Add image post (optional)
