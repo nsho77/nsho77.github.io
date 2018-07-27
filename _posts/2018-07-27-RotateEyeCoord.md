@@ -146,6 +146,7 @@ bool Renderer::RenderMIPAnyDirection(unsigned char* image,
 void CVolumeRendererView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
     ...
+	
 
 switch (nChar)
 	{
