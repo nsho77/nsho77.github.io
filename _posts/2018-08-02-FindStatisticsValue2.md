@@ -40,11 +40,13 @@ float rounded_up = ceilf(val*100) / 100; /// 올림 37.78
 
 이를 위해 이용할 알고리즘은
 1. Merge Sort
-2. Quick Sort
-3. Heap Sort
+2. Heap Sort
+3. Quick Sort
+
 
 모두 정렬하지 않고 k 번째 값을 찾는 
-1. Medium of Medium
+1. Quick Select
+2. Medium of Medium
 
 우선 Merge Sort 를 구현하여 중앙값을 찾아보자.
 {% highlight cpp %}
@@ -196,4 +198,40 @@ int FindMiddleValue(int* arr, int size)
 
 속도가 더 느려지지만 MergeSort로도 충분히 해결할 수 있다.
 
-다음은 Quick Sort를 구현해 활용해보자.
+다음은 Quick Select 를 구현해 활용해보자.
+{% highlight cpp %}
+
+int partition(int* arr, int left, int right, int pivotIndex)
+{
+	swap(arr + pivotIndex, arr + right);
+	int res_pivotIdx = right; int l = left;
+	for(int i = left; i< right; i++)
+	{
+		if(arr[i] > arr[res_pivotIdx])
+			continue;
+		swap(arr+i, arr+l++);
+	}
+
+	swap(arr+l , arr+res_pivotIdx);
+	res_pivotIdx = l;
+	return res_pivotIdx;
+}
+
+int QuickSelect(int* arr, int left, int right, int k)
+{
+	int pivotIndex = right;
+	pivotIndex = partition(arr, left, right, pivotIndex);
+
+	if(k < pivotIndex)
+		return QuickSelect(arr, left, pivotIndex-1, k);
+	else if(k < pivotIndex +1 )
+		return arr[pivotIndex];
+	else
+		return QuickSelect(arr, pivotIndex + 1, right, k);
+}
+
+int FindMiddleValue(int* arr, int size)
+{
+	return QuickSelect(arr, 0, size-1, size /2 );
+}
+{% endhighlight%}
