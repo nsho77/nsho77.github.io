@@ -235,3 +235,40 @@ int FindMiddleValue(int* arr, int size)
 	return QuickSelect(arr, 0, size-1, size /2 );
 }
 {% endhighlight%}
+
+QuickSelect 는 size 값만을 받아서 하는 방식으로 해결할 수도 있다.
+
+{% highlight cpp %}
+int partition(int* arr, int size, int pivotIndex)
+{
+	int _pivotIndex = size-1;
+	swap(arr+pivotIndex, arr+size-1);
+	int l = 0;
+	for(int i=0; i<size-1; i++)
+	{
+		if(arr[_pivotIndex] < arr[i]) continue;
+		swap(arr+ i, arr+ l++);
+	}
+	swap(arr+l, arr+_pivotIndex);
+	_pivotIndex = l;
+	return _pivotIndex;
+}
+
+int QuickSelect(int* arr, int size, int k)
+{
+	int pivotIndex = size-1;
+	pivotIndex = partition(arr, size, pivotIndex);
+
+	if(k < pivotIndex)
+		return QuickSelect(arr, pivotIndex, k);
+	else if(k <pivotIndex+1)
+		return arr[pivotIndex];
+	else
+		return QuickSelect(arr+pivotIndex+1, size-pivotIndex-1, k-pivotIndex-1);
+}
+
+int FindMiddleValue(int* arr, int size)
+{
+	return QuickSelect(arr, size, size/2);
+}
+{% endhighlight %}
