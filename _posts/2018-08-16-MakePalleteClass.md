@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 3D 이미지를 화면에 뿌려보자 - 1
-date: 2018-08-14 10:00:00 +0900
+date: 2018-08-16 10:00:00 +0900
 description: EyeCoord 를 임의의 점을 중심으로 회전시켜보자3 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
