@@ -7,6 +7,9 @@ img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
 ---
 
+ray-casting (광선 추척법)을 이용하여 3D volume 을 rendering 해보자.
+
+
 > Renderer.cpp
 {% highlight cpp %}
 bool Renderer::RenderVRAnyDirection(unsigned char* image,
@@ -99,9 +102,9 @@ bool Renderer::RenderVRAnyDirection(unsigned char* image,
             for(float k = t[0]; k < t[1]; t+=1.f)
             {
                 float3 adv_coord = cur_coord + view_vector * k;
-                if(adv_coord.x >= 1.f && adv_coord.x < vol_width - 2 &&
-                   adv_coord.y >= 1.f && adv_coord.y < vol_height - 2 &&
-                   adv_coord.z > =1.f && adv_coord.z < vol_depth - 2)
+                if(adv_coord.x >= 0.f && adv_coord.x < vol_width   &&
+                   adv_coord.y >= 0.f && adv_coord.y < vol_height  &&
+                   adv_coord.z > =0.f && adv_coord.z < vol_depth )
                    {
                        int intensity = m_pVolume->GetVoxel(static_cast<int>(adv_coord.x),static_cast<int>(adv_coord.y), static_cast<int>(adv_coord.z));
                        float cur_blue = m_pTF->GetPalleteCValue(0, intensity);
