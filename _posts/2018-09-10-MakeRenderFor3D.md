@@ -129,4 +129,4 @@ bool Renderer::RenderVRAnyDirection(unsigned char* image,
 }
 {% endhighlight %}
 
-![MIP-any]({{"/assets/img/Volume/bighead-1dpallet.png"}})
+![bighead-1dpallet]({{"/assets/img/Volume/bighead-1dpallet.png"}})
