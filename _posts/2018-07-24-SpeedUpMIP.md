@@ -5,6 +5,7 @@ date: 2018-07-24 11:20:00 +0900
 description: MIP Any Direction 의 속도 를 향상시켜보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 속도를 향상시키기 전에 현재 얼마나 걸리는 지 측정해보자.

@@ -5,6 +5,7 @@ date: 2018-08-16 10:00:00 +0900
 description: Intensity 를 기초로 Pallette 클래스를 만들자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 지금까지는 MIP 를 이용하여 3D 이미지를 화면에 뿌려보았다. 

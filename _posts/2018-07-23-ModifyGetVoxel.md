@@ -5,6 +5,7 @@ date: 2018-07-23 11:00:00 +0900
 description: Volume 으로 MIP 를 만들어보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 기존의 GetVoxel 함수를 보면 이렇다.

@@ -5,6 +5,7 @@ date: 2018-07-12 10:00:00 +0900
 description: Volume Rendering 을 해보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 지금까지 포스팅은 2차원 이미지를 다뤘다. 이미지 구조가 3차원인 데이터를 처리하는 방법을 알아보자.

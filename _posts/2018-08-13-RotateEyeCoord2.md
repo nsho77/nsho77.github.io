@@ -5,6 +5,7 @@ date: 2018-08-13 13:00:00 +0900
 description: EyeCoord 를 임의의 점을 중심으로 회전시켜보자2 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 이전에는 방향키 이벤트를 적용하기 위해 view 클래스에서 Renderer 클래스 포인터를 받아서 구현했다.

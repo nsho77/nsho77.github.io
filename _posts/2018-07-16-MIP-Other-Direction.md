@@ -5,6 +5,7 @@ date: 2018-07-16 10:00:00 +0900
 description: Volume 으로 MIP 를 만들어보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 이전 [포스팅](https://nsho77.github.io/MIPImage) 에서는 Z 방향으로 MIP 를 만들어 보았는데, X 방향 Y 방향 또는 어떤 방향에서도

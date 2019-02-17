@@ -5,6 +5,7 @@ date: 2018-07-18 10:45:00 +0900
 description: Volume 으로 MIP 를 만들어보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 이전 MIP 는 X, Y, Z 방향에서 본 화면 이었다.

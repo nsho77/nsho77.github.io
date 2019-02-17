@@ -5,6 +5,7 @@ date: 2018-09-10 09:00:00 +0900
 description: 광선을 추적하면서 렌더해보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 ray-casting (광선 추척법)을 이용하여 3D volume 을 rendering 해보자.

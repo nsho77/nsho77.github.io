@@ -5,6 +5,7 @@ date: 2018-07-27 09:00:00 +0900
 description: EyeCoord 를 임의의 점을 중심으로 회전시켜보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 방향키를 눌렀을 때 보는 점(시점)의 좌표를 특정 각도 만큼 회전시켜 보자.

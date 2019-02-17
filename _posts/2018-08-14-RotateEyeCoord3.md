@@ -5,6 +5,7 @@ date: 2018-08-14 10:00:00 +0900
 description: EyeCoord 를 임의의 점을 중심으로 회전시켜보자3 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 이전까지 방향키를 눌렀을 때 MIP 를 회전하면서 보여주는 기능을 만들었다. 여기에는 문제가 있다.

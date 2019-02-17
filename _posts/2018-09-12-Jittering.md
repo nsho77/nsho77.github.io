@@ -5,6 +5,7 @@ date: 2018-09-12 21:00:00 +0900
 description: jittering # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, volume]
+categories: [Image Processing]
 ---
 
 jittering 이라는 방법으로 나뭇결 무늬를 제거해보자.

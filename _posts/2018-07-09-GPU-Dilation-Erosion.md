@@ -5,6 +5,7 @@ date: 2018-07-09 10:00:00 +0900
 description: image processing 을 gpu를 이용해 처리해보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, Cuda]
+categories: [Image Processing]
 ---
 
 
