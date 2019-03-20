@@ -12,4 +12,6 @@ categories : [Remote Client]
 - D2DRenderer::GetSelectedStreamIndex로 selected_index 가져온다.
 
 ## selected_index 값을 변경시키는 방법은?
+ - 아래서부터 이벤트가 발생? [여기 참조](/RC_EventCreateUsingSignal)
+ - boost::signals2::signal, boost::signals2::connection [여기 참조](/C++_signal/)
 
