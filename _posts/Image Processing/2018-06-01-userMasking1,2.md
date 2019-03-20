@@ -5,6 +5,7 @@ date: 2018-06-01 09:00:00 +0900
 description: mfc imageprocessing masking 작업을 알아보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 이전 [바이너리화](../binarization-etc), [침식,팽창](../imageErosion-Dilation)까지 픽셀단위, 영역단위 이미지 조작을 했다.

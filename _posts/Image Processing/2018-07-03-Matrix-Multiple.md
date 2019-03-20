@@ -5,6 +5,7 @@ date: 2018-07-03 09:00:00 +0900
 description: Cuda Progamming # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, Cuda]
+categories: [Image Processing]
 ---
 
 CUDA 를 이용해 행렬의 곱셈을 해보자.

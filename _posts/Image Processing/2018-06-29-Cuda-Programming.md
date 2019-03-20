@@ -5,6 +5,7 @@ date: 2018-06-29 10:15:00 +0900
 description: Cuda Progamming # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, Cuda]
+categories: [Image Processing]
 ---
 
 CUDA(Computed Unified Device Architecture) 는 NVIDIA에서 개발한 GPU 개발툴이다. 

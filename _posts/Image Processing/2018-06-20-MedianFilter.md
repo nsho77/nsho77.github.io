@@ -5,6 +5,7 @@ date: 2018-06-18 08:30:00 +0900
 description: mfc imageprocessing Median Filter 작업을 알아보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 median filter는 window masking 영역의 값중 중간 값을 해당 픽셀에 넣는 다른 형태의 마스킹이다.

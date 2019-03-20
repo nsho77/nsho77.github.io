@@ -5,6 +5,7 @@ date: 2018-07-04 10:00:00 +0900
 description: image processing 을 gpu를 이용해 처리해보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing, Cuda]
+categories: [Image Processing]
 ---
 
 이번 포스팅에서 기존 영상처리에 사용되었던 기술인 Adaptive Binarization 을 

@@ -5,6 +5,7 @@ date: 2018-06-26 11:15:00 +0900
 description: mfc imageprocessing Histogram 작업을 알아보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 이번 포스팅에서는 image를 이용하여 histogram을 그려볼 것이다.

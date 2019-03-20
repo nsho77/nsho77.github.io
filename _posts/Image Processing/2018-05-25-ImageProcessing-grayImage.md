@@ -5,6 +5,7 @@ date: 2018-05-25 09:27:00 +0900
 description: mfc imageprocessing 화면에 흑백이미지를 함께 출력해보자 # Add post description (optional)
 img:   # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 기존 ImageProcessing [작업](../mfcImageProcessing) 에서는 화면에 그림 하나를 띄웠다.

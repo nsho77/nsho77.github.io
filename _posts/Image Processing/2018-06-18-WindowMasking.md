@@ -5,6 +5,7 @@ date: 2018-06-18 08:30:00 +0900
 description: mfc imageprocessing window masking 작업을 알아보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 이번에 할 것은 3x3, 5x5 사이즈의 윈도우 마스크를 만들어 이미지에 적용해보는 것이다.

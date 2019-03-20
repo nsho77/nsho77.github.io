@@ -5,6 +5,7 @@ date: 2018-06-18 08:30:00 +0900
 description: mfc imageprocessing window masking 작업을 알아보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 이전 작업에 이어서, 다양한 윈도우 마스킹을 적용해보자.

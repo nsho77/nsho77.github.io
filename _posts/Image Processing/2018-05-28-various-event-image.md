@@ -5,6 +5,7 @@ date: 2018-05-28 16:00:00 +0900
 description: mfc imageprocessing 다양한 이미지 작업을 알아보자 # Add post description (optional)
 img:   # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 [이전](../ImageProcessing-grayImage)까지 칼라이미지와 흑백이미지를 함께 출력하는 작업을 했다.

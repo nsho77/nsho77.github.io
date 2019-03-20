@@ -5,6 +5,7 @@ date: 2018-05-25 08:45:00 +0900
 description: mfc imageprocessing next 이벤트를 달자 # Add post description (optional)
 img:   # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 기존 ImageProcessing [작업](../mfcImageProcessing)은 파일 다이얼로그에서 이미지 파일을 읽은 뒤 해당 함수에서 이미지를 세팅하는 함수를 호출하는 구조였다. (아래코드 참조)

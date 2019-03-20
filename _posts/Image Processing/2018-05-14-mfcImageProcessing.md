@@ -5,6 +5,7 @@ date: 2018-05-14 19:20:00 +0900
 description: mfc imageprocessing 하나하나 풀어보자 # Add post description (optional)
 img:  /imageProcessing/panda.bmp # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 mfc 로 프로젝트를 생성하면 다음과 같은 소스파일이 생성된다.

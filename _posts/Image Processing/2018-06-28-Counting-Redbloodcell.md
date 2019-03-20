@@ -5,6 +5,7 @@ date: 2018-06-28 14:45:00 +0900
 description: mfc imageprocessing region growing 작업을 알아보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 적혈구 사진을 준비하고 image에 나오는 적혈구 숫자를 세어보는 놀이를 해보자.

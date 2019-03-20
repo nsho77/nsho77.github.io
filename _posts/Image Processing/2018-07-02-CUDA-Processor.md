@@ -5,6 +5,7 @@ date: 2018-07-02 09:00:00 +0900
 description: Cuda Progamming # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, Cuda]
+categories: [Image Processing]
 ---
 
 이번 글은 이 분의 [글](http://haanjack.github.io/cuda/2016/03/31/cuda-processor.html)을 참고했다.

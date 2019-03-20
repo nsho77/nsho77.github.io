@@ -5,6 +5,7 @@ date: 2018-06-11 09:00:00 +0900
 description: median of medians 알고리즘을 이해해보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, algorithm]
+categories: [Image Processing]
 ---
 
 스택오버플로우 해당 [링크](https://stackoverflow.com/questions/9489061/understanding-median-of-medians-algorithm)에서 median of medians 설명이 있다. 글을 보면서 설명을 이해하고 영상처리에 적용하는게 이번 포스트의 목표이다.

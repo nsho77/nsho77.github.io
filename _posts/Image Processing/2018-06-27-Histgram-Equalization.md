@@ -5,6 +5,7 @@ date: 2018-06-27 14:45:00 +0900
 description: mfc imageprocessing Histogram Equalization 작업을 알아보자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, imageProcessing]
+categories: [Image Processing]
 ---
 
 히스토그램 평활화란 명암 값의 분포가 한쪽으로 치우친 영상이 있을 때,
