@@ -9,7 +9,7 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: Seongho # add your name
 author-img:  # add your photo
-about-author: I am a software developer, now I'm learning machine vision. # add description
+about-author: I am a software developer, interested in Image Processing. # add description
 social-twitter: # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-github: nsho77 # add your Github handle
@@ -17,7 +17,7 @@ social-linkedin:  # add your Linkedin handle
 social-email: nsho77@naver.com # add your Email address
 
 # Disqus
-discus-identifier: mr-brown # add your discus identifier
+discus-identifier: mr-SeongHo.Roh # add your discus identifier
 
 # Tracker
 analytics: # Google Analytics
@@ -29,7 +29,7 @@ plugins:
   - jekyll-paginate
   - jemoji
 
-paginate: 8
+paginate: 21
 paginate_path: "/page/:num"
 
 exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock"]
