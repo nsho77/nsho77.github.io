@@ -12,10 +12,10 @@ categories : [Remote Client]
  - Renderer::DoubleClick 호출.
  
 ## 아직 확대되지 않은 상황이라면??
- - 스트림 벡터를 돌면서, 선택한 채널과
- - 스트림이 가지고있는 채널이 같으면 스트림이 가진 채널을 prev_tile_index에 저장하고
+ - 스트림 벡터를 돌면서, 선택한 타일과
+ - 스트림이 가지고있는 타일이 같으면 스트림이 가진 타일을 prev_tile_index에 저장하고
  - max_channel_index 에 현재 스트림 인덱스를 저장한다.
- - 채널이 0인 스트림을 만나면 스트림 인덱스를 prev_first_channel_index 에 따로 저장한다.
+ - 타일이 0인 스트림을 만나면 스트림 인덱스를 prev_first_channel_index 에 따로 저장한다.
  - 이후,
  - max_channel_index 의 tile_index 를 0으로,
  - prev_first_channel_index의 tile_index 에 prev_tile_index 를 저장한다.

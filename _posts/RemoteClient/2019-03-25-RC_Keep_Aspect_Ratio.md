@@ -25,7 +25,7 @@ categories : [Remote Client]
     - 따라서, new_height = height / screen_frame_ratio
  - 그릴 image_rect 을 계산한다.
 
-## frame_ration 가 더 작으면( 위아래로 더 길쭉하면 )
+## frame_ratio 가 더 작으면( 위아래로 더 길쭉하면 )
  - UI 높이를 모두 이용한다.
  - 새로운 너비를 구한다.
     - 세로길이가 줄어든 % 만큼 가로 길이를 줄인다.

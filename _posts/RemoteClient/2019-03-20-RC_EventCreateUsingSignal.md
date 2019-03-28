@@ -14,5 +14,5 @@ categories : [Remote Client]
 - signal 과 함수를 Connect 하는 함수 정의.
 - MultiScreen 에서 signal 과 subscribe 함수가 실제 연결.
 - D2DRenderer::SetSelectedTileIndex 에서 Call Signal.
-- MultiScreen::RaiseSelectedIndexChangedEvent 에서 넘겨받은 콜백을 호출.
+- MultiScreen::RaiseSelectedIndexChangedEvent 에서 subscribe 함수를 호출.
 
