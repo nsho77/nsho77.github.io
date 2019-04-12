@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bouding Rect Position 잡는 방법
-date: 2019-04-10 10:30:00 +0900
+date: 2019-04-11 10:30:00 +0900
 description: Remote Client # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development]

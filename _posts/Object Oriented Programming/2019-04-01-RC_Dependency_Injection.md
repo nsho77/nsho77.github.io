@@ -5,7 +5,7 @@ date: 2019-04-01 13:00:00 +0900
 description: Remote Client # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development]
-categories : [Remote Client]
+categories : [OOP]
 ---
 
 ## Dependency Injection 이란?
