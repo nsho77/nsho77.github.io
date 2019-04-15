@@ -7,7 +7,8 @@ img:  # Add image post (optional)
 tags: [development]
 categories : [Remote Client]
 ---
-1. 
+# 1. 절대좌표 Set 이벤트
+
 ## MapItemCollection 에서 Event Attach
  - GraphicMapControl에서 Add 등 할때 호출
  - MouseMove Event -> OnItemMoved 호출 -> SetAbsoluteLocation 호출
@@ -16,7 +17,8 @@ categories : [Remote Client]
  - mapItem 중심 좌표를 현재 지도 사이즈 대비 비율로 변환
  - item.AbsoluteLocation 에 저장.
 
-2. 
+# 2. ControlMoverOrResizer 이벤트
+
 ## ControlMoverOrResizer 에서 Event Attach
  - Initialize 로 등록
  - MoveControl 호출
