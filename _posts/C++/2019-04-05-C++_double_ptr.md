@@ -20,3 +20,38 @@ categories : [C++]
 ## 더블 포인터의 두 가지 경우
  - A type 의 배열을 감싸는 배열
  - A type pointer 배열
+
+## 포인터의 주소를 바꾸고 싶을 때
+##### 싱글 pointer 를 사용한 경우
+{% highlight cpp %}
+void ChangePtrAddr(int* ptr)
+{
+    ptr = new int[3];
+}
+
+int* mainPtr = new int[5];
+ChangePtrAddr(mainPtr);
+
+{% endhighlight%}
+
+ - ptr 이 Stack 생성 되고 mainPtr 값 복사됨.
+ - ptr 에 새로운 주소 할당.
+ - 그러나, 함수 빠져나오면서 ptr 소멸.
+ - mainPtr 값은 바뀌지 않음.
+
+
+##### 더블 pointer 를 사용한 경우
+{% highlight cpp %}
+void ChangePtrAddr(int** dbptr)
+{
+    *dbptr = new int[3];
+}
+
+int* mainPtr = new int[5];
+ChangePtrAddr(&mainPtr);
+
+{% endhighlight %}
+ - dbptr 이 Stack 생성, mainPtr 주소가 복사됨.
+ - dbptr 역참조 mainPtr 의 주소를 바꿈.
+ - 함수 빠져나오면서 dbptr 소멸
+ - mainPtr 값 바뀜.
