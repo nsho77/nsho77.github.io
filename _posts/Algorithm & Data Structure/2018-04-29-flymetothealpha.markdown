@@ -5,6 +5,7 @@ date: 2018-04-29 12:00:00 +0900
 description: 백준의 문제를 풀어보았다. # Add post description (optional)
 img:  we-in-rest.jpg # Add image post (optional)
 tags: [Algorithm, Code] # add tag
+categories : [Algorithm & Data Structure]
 ---
 백준에 있는 fly_me_to_the_alpha_centauri 를 풀어보았다. <br />
 사실 풀지 못하고 사람들이 풀이해준 걸 보고 풀었다. 그래도 어려웠다... <br />

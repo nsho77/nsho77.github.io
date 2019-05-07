@@ -5,6 +5,7 @@ date: 2018-05-31 08:40:00 +0900
 description: medium 에서 올라온 글을 번역했다. AJAX에 관한 내용 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [development, translate]
+categories : [Algorithm & Data Structure]
 ---
 
 > medium 에 올라온 [글](https://medium.freecodecamp.org/ajax-basics-explained-by-working-at-a-fast-food-restaurant-88d95f5fcb7a)을 번역했다.

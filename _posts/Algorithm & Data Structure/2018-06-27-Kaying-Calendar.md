@@ -5,6 +5,7 @@ date: 2018-06-27 09:30:00 +0900
 description: 백준문제 풀기 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [Algorithm, Code]
+categories : [Algorithm & Data Structure]
 ---
 
 > 백준에 있는 카잉달력 문제를 풀어보았다. [문제링크](https://www.acmicpc.net/problem/6064)

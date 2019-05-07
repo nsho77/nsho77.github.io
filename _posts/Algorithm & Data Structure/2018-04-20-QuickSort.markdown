@@ -5,6 +5,7 @@ date: 2018-04-20 19:10:20 +0900
 description: Quick Sort를 직접 구현해보면서 공부하자 # Add post description (optional)
 img: i-rest.jpg # Add image post (optional)
 tags: [Algorithm, Programming]
+categories : [Algorithm & Data Structure]
 ---
 Quick Sort는 정렬하기 위한 배열에서 pivot 요소를 택한 다음 pivot 요소 왼쪽에는 우선순위가 높은 요소, 오른쪽에는 우선순위가 요소로 정렬하는 알고리즘이다. 알고리즘 성능이 O(logN)으로 아주 효과적이다. 구현할 순서는 다음과 같다.
 

@@ -5,6 +5,7 @@ date: 2018-07-11 10:00:00 +0900
 description: Merge Sort를 직접 구현해보면서 공부하자 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [Algorithm, Programming]
+categories : [Algorithm & Data Structure]
 ---
 
 Merge Sort 에 대해 알아보자.

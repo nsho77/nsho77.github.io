@@ -5,6 +5,7 @@ date: 2018-05-09 13:00:00 +0900
 description: 백준문제 풀기 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [Algorithm, Code]
+categories : [Algorithm & Data Structure]
 ---
 
 > 백준에 있는 부녀회장이 될테야 문제를 풀어보았다. [문제링크](https://www.acmicpc.net/problem/2775)

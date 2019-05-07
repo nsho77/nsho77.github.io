@@ -5,6 +5,7 @@ date: 2018-04-23 14:45:00 +0900
 description: 백준에서 규칙찾기 문제 3개를 풀어보았다. 마크다운 도 연습할겸.. # Add post description (optional)
 img: software.jpg # Add image post (optional)
 tags: [Algorithm, Code] # add tag
+categories : [Algorithm & Data Structure]
 ---
 
 코딩 연습 할 겸 백준(<https://www.acmicpc.net/>)에서 문제를 찾아 풀기 시작했다. 목표는 일주일에 3개!! Slack과 블로그에 코딩한 것과 코멘트를 올릴 생각이다.

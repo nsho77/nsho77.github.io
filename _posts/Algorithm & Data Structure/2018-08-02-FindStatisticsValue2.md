@@ -5,6 +5,7 @@ date: 2018-08-02 11:00:00 +0900
 description: 내가 구현한 4가지 통계값 찾기 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [Algorithm, Programming]
+categories : [Algorithm & Data Structure]
 ---
 
 이전 포스팅에서 풀어보았던 4가지 통계값 찾기 문제를 다른 방법으로 풀어보자

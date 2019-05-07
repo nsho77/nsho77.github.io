@@ -5,6 +5,7 @@ date: 2018-08-01 15:30:00 +0900
 description: 내가 구현한 4가지 통계값 찾기 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [Algorithm, Programming]
+categories : [Algorithm & Data Structure]
 ---
 
 백준의 2108번 문제를 풀어보았다.

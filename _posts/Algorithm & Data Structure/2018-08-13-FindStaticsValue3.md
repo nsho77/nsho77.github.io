@@ -5,6 +5,7 @@ date: 2018-08-13 10:00:00 +0900
 description: 내가 구현한 4가지 통계값 찾기 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [Algorithm, Programming]
+categories : [Algorithm & Data Structure]
 ---
 
 이전 포스팅에서 Median 값을 찾기 위해 QuickSelect 를 이용했었다. QuickSelect의 경우 pivot 값이 무엇인지에 따라

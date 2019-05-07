@@ -5,6 +5,7 @@ date: 2019-04-05 09:00:00 +0900
 description: 자료구조, 알고리즘 # Add post description (optional)
 img:  # Add image post (optional)
 tags: [Algorithm, Programming]
+categories : [Algorithm & Data Structure]
 ---
 
 ## Big-O Complexity Chart
