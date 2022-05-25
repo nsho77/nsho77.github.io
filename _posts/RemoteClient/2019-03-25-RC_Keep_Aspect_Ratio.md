@@ -34,5 +34,5 @@ categories : [Remote Client]
     ~~- 이 수치가 screen_frame_ratio~~
     ~~- 따라서, new_width = width * screen_frame_ratio~~
     - frame_ratio 만큼 너비를 변화시킨다.
-    - 따라서, new_width = width * screen_frame_ratio
+    - 따라서, new_width = ui_width * frame_ratio
  -  그릴 image_rect 을 계산한다.
